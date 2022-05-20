@@ -43,7 +43,8 @@ public class PersonDAO {
     public Person findByVorname(String vorname){
         Person p = (Person) em.createQuery("select p from Person p where p.vorname = :vn")
                 .setParameter("vn", vorname)
-                .getSingleResult();
+                .getResultList()
+                .get(0);
         return p;
     }
 

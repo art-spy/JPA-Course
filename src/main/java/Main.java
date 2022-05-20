@@ -1,20 +1,24 @@
 import dao.PersonDAO;
 import model.Person;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        insertPerson();
-        updatePerson();
-        selectPerson();
-        removePerson();
+        insertMax();
+        setBirthdate();
+        renameMaxToEva();
+        printName();
+        //removePerson();
 
     }
 
     // im folgenden beispielhaft implementierte, einzelne Transaktionen (nur zur Anschauung)
 
-    public static void insertPerson(){
+    public static void insertMax(){
         PersonDAO personDAO = new PersonDAO();
         Person p = new Person();
 
@@ -26,7 +30,7 @@ public class Main {
 
     }
 
-    public static void selectPerson(){
+    public static void printName(){
         PersonDAO personDAO = new PersonDAO();
         Person p = personDAO.findByVorname("Eva");
         // EntityNotFoundException, wenn es das Objekt in der Datenbank nicht gibt.
@@ -42,7 +46,7 @@ public class Main {
         personDAO.shutdown();
     }
 
-    public static void updatePerson(){
+    public static void renameMaxToEva(){
         PersonDAO personDAO = new PersonDAO();
         Person p = personDAO.findByVorname("Max");
 
@@ -56,6 +60,22 @@ public class Main {
         personDAO.persist(p);
         personDAO.shutdown();
     }
+
+    public static void setBirthdate(){
+        PersonDAO personDAO = new PersonDAO();
+        Person p = personDAO.findByVorname("Max");
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(1975, Calendar.MARCH, 15);
+        Date geburtsdatum = cal.getTime();
+
+        p.setGeburtsdatum(geburtsdatum);
+
+        personDAO.persist(p);
+        personDAO.shutdown();
+
+    }
+
 
     public static void removePerson(){
         PersonDAO personDAO = new PersonDAO();

@@ -3,6 +3,7 @@ package model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Entity implementation class for Person entity
@@ -19,6 +20,17 @@ public class Person implements Serializable {
 
     private String vorname;
     private String nachname;
+
+    public Date getGeburtsdatum() {
+        return geburtsdatum;
+    }
+
+    public void setGeburtsdatum(Date geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
+    }
+
+    private Date geburtsdatum;
+
     private static final long serialVersionUID = 1L;
 
     public Person() {
