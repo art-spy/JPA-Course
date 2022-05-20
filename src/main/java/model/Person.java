@@ -1,16 +1,22 @@
-package Person;
+package model;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+/**
+ * Entity implementation class for Person entity
+ */
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
 
+
+    // primärer Schlüssel
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
+
     private String vorname;
     private String nachname;
     private static final long serialVersionUID = 1L;
