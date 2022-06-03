@@ -13,7 +13,9 @@ import java.util.Collection;
  */
 public class PersonDAO {
 
+    // Interface
     private EntityManagerFactory factory;
+    // Interface, u.a. mit Methodenköpfen find, remove, merge u.a.
     private EntityManager em;
 
     public PersonDAO() {

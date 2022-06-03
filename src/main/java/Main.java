@@ -1,8 +1,12 @@
 import dao.PersonDAO;
+import model.Geschlecht;
 import model.Person;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
 public class Main {
 
@@ -10,8 +14,9 @@ public class Main {
 
         insertMax();
         setBirthdate();
+        printPersonDetails("Max");
         renameMaxToEva();
-        printName();
+        printPersonDetails("Eva");
         //removePerson();
 
     }
@@ -24,23 +29,47 @@ public class Main {
 
         p.setVorname("Max");
         p.setNachname("Mustermann");
+        p.setGeschlecht(Geschlecht.MAENNLICH);
+
+        try {
+            p.setPassbild(Files.readAllBytes(Paths.get("maxmustermann.png")));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        p.setKommentar("Mein lieber Max Mustermann!");
 
         personDAO.persist(p);
         personDAO.shutdown();
 
     }
 
-    public static void printName(){
+    public static void setBirthdate(){
         PersonDAO personDAO = new PersonDAO();
-        Person p = personDAO.findByVorname("Eva");
+        Person p = personDAO.findByVorname("Max");
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(1975, Calendar.MARCH, 15);
+        Date geburtsdatum = new Date(cal.getTime().getTime());
+        p.setGeburtsdatum(geburtsdatum);
+
+        personDAO.persist(p);
+        personDAO.shutdown();
+
+    }
+
+    public static void printPersonDetails(String vorname){
+        PersonDAO personDAO = new PersonDAO();
+        Person p = personDAO.findByVorname(vorname);
         // EntityNotFoundException, wenn es das Objekt in der Datenbank nicht gibt.
 
         if (p != null){
-            System.out.print(p.getVorname() + " ");
-            System.out.println(p.getNachname());
+            System.out.println(p.getVorname() + " " + p.getNachname());
+            System.out.println("Kommentar: " + p.getKommentar());
         }
         else {
-            System.out.println("Das Objekt ist nicht vorhanden!");
+            System.out.println("Die Person " +  vorname + " ist nicht vorhanden!");
         }
 
         personDAO.shutdown();
@@ -52,6 +81,8 @@ public class Main {
 
         if (p != null){
             p.setVorname("Eva");
+            p.setGeschlecht(Geschlecht.WEIBLICH);
+            p.setKommentar("Meine liebe Eva Mustermann!");
         }
         else {
             System.out.println("Das Objekt ist nicht vorhanden!");
@@ -60,22 +91,6 @@ public class Main {
         personDAO.persist(p);
         personDAO.shutdown();
     }
-
-    public static void setBirthdate(){
-        PersonDAO personDAO = new PersonDAO();
-        Person p = personDAO.findByVorname("Max");
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(1975, Calendar.MARCH, 15);
-        Date geburtsdatum = cal.getTime();
-
-        p.setGeburtsdatum(geburtsdatum);
-
-        personDAO.persist(p);
-        personDAO.shutdown();
-
-    }
-
 
     public static void removePerson(){
         PersonDAO personDAO = new PersonDAO();
