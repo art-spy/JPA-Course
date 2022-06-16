@@ -10,6 +10,9 @@ import java.sql.Date;
 
 public class Main {
 
+    public static PersonDAO personDAO = new PersonDAO();
+    public static Person p = new Person();
+
     public static void main(String[] args) {
 
         insertMax();
@@ -17,15 +20,15 @@ public class Main {
         printPersonDetails("Max");
         renameMaxToEva();
         printPersonDetails("Eva");
-        //removePerson();
+        removePerson();
+
+        personDAO.shutdown();
 
     }
 
     // im folgenden beispielhaft implementierte, einzelne Transaktionen (nur zur Anschauung)
 
     public static void insertMax(){
-        PersonDAO personDAO = new PersonDAO();
-        Person p = new Person();
 
         p.setVorname("Max");
         p.setNachname("Mustermann");
@@ -41,13 +44,12 @@ public class Main {
         p.setKommentar("Mein lieber Max Mustermann!");
 
         personDAO.persist(p);
-        personDAO.shutdown();
+
 
     }
 
     public static void setBirthdate(){
-        PersonDAO personDAO = new PersonDAO();
-        Person p = personDAO.findByVorname("Max");
+        personDAO.findByVorname("Max");
 
         Calendar cal = Calendar.getInstance();
         cal.set(1975, Calendar.MARCH, 15);
@@ -55,29 +57,24 @@ public class Main {
         p.setGeburtsdatum(geburtsdatum);
 
         personDAO.persist(p);
-        personDAO.shutdown();
 
     }
 
     public static void printPersonDetails(String vorname){
-        PersonDAO personDAO = new PersonDAO();
-        Person p = personDAO.findByVorname(vorname);
+        personDAO.findByVorname(vorname);
         // EntityNotFoundException, wenn es das Objekt in der Datenbank nicht gibt.
 
         if (p != null){
-            System.out.println(p.getVorname() + " " + p.getNachname());
+            System.out.println("Person mit ID " + p.getId() + ": " + p.getVorname() + " " + p.getNachname());
             System.out.println("Kommentar: " + p.getKommentar());
         }
         else {
             System.out.println("Die Person " +  vorname + " ist nicht vorhanden!");
         }
-
-        personDAO.shutdown();
     }
 
     public static void renameMaxToEva(){
-        PersonDAO personDAO = new PersonDAO();
-        Person p = personDAO.findByVorname("Max");
+        personDAO.findByVorname("Max");
 
         if (p != null){
             p.setVorname("Eva");
@@ -89,12 +86,10 @@ public class Main {
         }
 
         personDAO.persist(p);
-        personDAO.shutdown();
     }
 
     public static void removePerson(){
-        PersonDAO personDAO = new PersonDAO();
-        Person p = personDAO.findByVorname("Eva");
+        personDAO.findByVorname("Eva");
         personDAO.delete(p.getId());
 
         // auf das Personen-Objekt kann in der objektorientierten Ebene weiterhin zugegriffen werden,
@@ -102,7 +97,6 @@ public class Main {
         System.out.println("Gelöschte Person: " + p.getVorname() + " " + p.getNachname());
 
         //personDAO.persist(p);
-        personDAO.shutdown();
     }
 
 

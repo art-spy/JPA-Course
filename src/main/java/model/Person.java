@@ -1,5 +1,6 @@
 package model;
 import jakarta.persistence.*;
+import model.listener.PersonListener;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -10,7 +11,7 @@ import java.sql.Date;
  *
  */
 @Entity
-
+@EntityListeners(PersonListener.class)
 public class Person implements Serializable {
 
     @Id
