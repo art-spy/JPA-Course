@@ -5,6 +5,11 @@
              version="3.0">
     <persistence-unit name="JPAKursprojekt" transaction-type="RESOURCE_LOCAL">
         <class>model.Person</class>
+        <class>model.Geschaeftspartner</class>
+        <class>model.Freund</class>
+        <class>model.Adresse</class>
+        <class>model.Emailadresse</class>
+        <class>model.Sprache</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
