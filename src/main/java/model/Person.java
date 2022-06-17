@@ -1,11 +1,15 @@
 package model;
-
+ 
 import java.io.Serializable;
 import java.lang.String;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.listener.PersonListener;
 
 /**
@@ -14,7 +18,9 @@ import model.listener.PersonListener;
  */
 @Entity
 @EntityListeners(PersonListener.class)
-public class Person implements Serializable {
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="Persontyp")
+public abstract class Person implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="gen")
@@ -22,8 +28,7 @@ public class Person implements Serializable {
 	private long id;
 	private String vorname;
 	private String nachnamen;
-	
-	
+
 	private Date geburtsdatum;
 	
 	@Enumerated(EnumType.STRING) 
@@ -34,7 +39,17 @@ public class Person implements Serializable {
 	
 	@Column(name="HINWEIS")
 	private String kommentar;
-		
+
+	@OneToOne (mappedBy="person", cascade=CascadeType.PERSIST)
+	private Adresse adresse;
+	
+	@OneToMany(mappedBy="person", cascade=CascadeType.PERSIST, orphanRemoval=true)
+	private Set<Emailadresse> emailaddresses;	
+	
+	@ManyToMany (cascade=CascadeType.PERSIST)
+	private Set<Sprache> sprachen;
+	
+			
 	public Date getGeburtsdatum() {
 		return geburtsdatum;
 	}
@@ -46,6 +61,8 @@ public class Person implements Serializable {
 
 	public Person() {
 		super();
+		emailaddresses = new HashSet<>();
+		sprachen = new HashSet<>();
 	}   
 	public long getId() {
 		return this.id;
@@ -92,5 +109,52 @@ public class Person implements Serializable {
 		
 		return vorname + " " + nachnamen;
 	}
+	public Adresse getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(Adresse adresse) {
+		
+		if (this.adresse != null) 
+			this.adresse.setPerson(null);
+		
+		this.adresse = adresse;
+	}
+	
+	public void addEmailadresse(String emailadressstring) {
+		Emailadresse emailadresse = new Emailadresse();
+		emailadresse.setEmailadressestring(emailadressstring);
+		emailadresse.setPerson(this);
+		emailaddresses.add(emailadresse);		
+	}
+	
+	public void removeEmailadresse(Emailadresse emailadresse) {
+		emailadresse.setPerson(null);
+		emailaddresses.remove(emailadresse);
+	}
+	public ObservableList<Emailadresse> getEmailadresses() {
+		return FXCollections.observableArrayList(emailaddresses);
+	}
+	
+	public Set<Sprache> getSprachen() {
+		return sprachen;
+	}
+	
+	public void clearSprachen() {
+		sprachen.clear();
+	}
+	
+	public void addSprache (Sprache sprache)
+	{
+		this.sprachen.add(sprache);
+	}
+	
 	
 }
+
+
+
+
+
+
+
+

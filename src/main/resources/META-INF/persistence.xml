@@ -17,6 +17,7 @@
             <property name="javax.persistence.jdbc.user" value="artur"/>
             <property name="javax.persistence.jdbc.password" value="wqB9bN2XsdJRA83X"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

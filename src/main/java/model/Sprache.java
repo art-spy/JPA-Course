@@ -17,9 +17,6 @@ public class Sprache {
 	
 	private String name;
 
-	public Sprache() {
-	}
-
 	public String getName() {
 		return name;
 	}

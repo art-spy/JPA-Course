@@ -5,6 +5,7 @@ import java.util.Collection;
 import jakarta.persistence.*;
 
 import model.Person;
+import model.Sprache;
 
 public class PersonDAO {
 
@@ -56,5 +57,14 @@ public class PersonDAO {
 		em.remove(p);
 		em.getTransaction().commit();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Sprache> findAllSprachen() {
+		Query query = em.createQuery("SELECT s FROM Sprache s");
+		Collection<Sprache> collection;
+		collection = (Collection<Sprache>) query.getResultList();
+		return collection;
+	}
+	
 
 }
