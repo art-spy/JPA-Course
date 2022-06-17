@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jpakurs" />
+        <module name="JPAKursprojekt" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jpakurs" target="1.8" />
+      <module name="JPAKursprojekt" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

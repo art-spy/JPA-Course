@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jpakurs.iml" filepath="$PROJECT_DIR$/jpakurs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JPAKursprojekt.iml" filepath="$PROJECT_DIR$/JPAKursprojekt.iml" />
     </modules>
   </component>
 </project>

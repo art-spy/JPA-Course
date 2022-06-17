@@ -3,8 +3,19 @@
 		<entity-name>model.Emailadresse</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>146</entity-height>
-		<entity-X-Coordinate>348</entity-X-Coordinate>
-		<entity-Y-Coordinate>360</entity-Y-Coordinate>
+		<entity-X-Coordinate>502</entity-X-Coordinate>
+		<entity-Y-Coordinate>234</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>model.Sprache</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>146</entity-height>
+		<entity-X-Coordinate>463</entity-X-Coordinate>
+		<entity-Y-Coordinate>414</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -25,19 +36,30 @@
 		<entity-name>model.Adresse</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>166</entity-height>
-		<entity-X-Coordinate>492</entity-X-Coordinate>
-		<entity-Y-Coordinate>66</entity-Y-Coordinate>
+		<entity-X-Coordinate>500</entity-X-Coordinate>
+		<entity-Y-Coordinate>32</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>model.Sprache</entity-name>
+		<entity-name>model.Geschaeftspartner</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>146</entity-height>
+		<entity-height>70</entity-height>
 		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>430</entity-Y-Coordinate>
+		<entity-Y-Coordinate>490</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>model.Freund</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>70</entity-height>
+		<entity-X-Coordinate>220</entity-X-Coordinate>
+		<entity-Y-Coordinate>490</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

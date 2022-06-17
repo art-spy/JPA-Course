@@ -324,14 +324,29 @@ public class Main extends Application {
 			}
 		});
 		
-		buttonPane.getChildren().addAll(neuGeschaeftspartnerButton,neuFreundButton,speicherButton,loeschenButton);
+		
+		Button leerenButton = new Button("Leeren");
+		leerenButton.setStyle("-fx-base: #FF9D88;");
+		
+		leerenButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				personDAO.deleteAll();
+				list.getItems().clear();
+				list.setItems(loadItemsFromDatabase());
+			}
+		});
+		
+		
+		buttonPane.getChildren().addAll(neuGeschaeftspartnerButton,neuFreundButton,speicherButton,loeschenButton,leerenButton);
 		
 		grid.add(buttonPane, 0, 14, 2, 1);
 		
 				
 		border.setCenter(grid);
 		
-		primaryStage.setScene(new Scene(border,750,750));
+		primaryStage.setScene(new Scene(border,770,680));
 		primaryStage.show();
 		
 	}

@@ -28,11 +28,10 @@ public class PersonDAO {
 		return em.find(Person.class, id);
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public Collection<Person> findAll() {
-		Query query = em.createQuery("SELECT p FROM Person p");
-		Collection<Person> collection;
-		collection = (Collection<Person>) query.getResultList();
+		TypedQuery<Person> query = em.createNamedQuery("findAll", Person.class);
+		Collection<Person> collection = query.getResultList();
 		return collection;
 	}
 	
@@ -58,6 +57,25 @@ public class PersonDAO {
 		em.getTransaction().commit();
 	}
 	
+	public void deleteAll() {
+		em.getTransaction().begin();
+		
+		Query queryAdresse = em.createQuery("DELETE FROM Adresse a");
+		int anzahlAdressen = queryAdresse.executeUpdate();
+
+		Query queryEmailAdresse = em.createQuery("DELETE FROM Emailadresse e");
+		int anzahlEmailAdressen = queryEmailAdresse.executeUpdate();
+		
+		Query queryPerson = em.createQuery("DELETE FROM Person p");
+		int anzahlPersonen = queryPerson.executeUpdate();
+
+		System.out.println(anzahlPersonen+ " Personen wurden gelöscht. "+anzahlAdressen+ " Adressen wurden gelöscht. "+ anzahlEmailAdressen+ " Emailadressen wurden gelöscht.");
+		
+		em.getTransaction().commit();
+	}
+
+	
+	
 	@SuppressWarnings("unchecked")
 	public Collection<Sprache> findAllSprachen() {
 		Query query = em.createQuery("SELECT s FROM Sprache s");
@@ -65,6 +83,7 @@ public class PersonDAO {
 		collection = (Collection<Sprache>) query.getResultList();
 		return collection;
 	}
+
 	
 
 }

@@ -20,6 +20,10 @@ import model.listener.PersonListener;
 @EntityListeners(PersonListener.class)
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="Persontyp")
+
+@NamedQueries({ @NamedQuery(name="findAll", query="SELECT p FROM Person p") })
+
+
 public abstract class Person implements Serializable {
 
 	@Id
@@ -28,7 +32,8 @@ public abstract class Person implements Serializable {
 	private long id;
 	private String vorname;
 	private String nachnamen;
-
+	
+	
 	private Date geburtsdatum;
 	
 	@Enumerated(EnumType.STRING) 
@@ -39,11 +44,12 @@ public abstract class Person implements Serializable {
 	
 	@Column(name="HINWEIS")
 	private String kommentar;
-
-	@OneToOne (mappedBy="person", cascade=CascadeType.PERSIST)
+	
+	
+	@OneToOne (mappedBy="person", cascade=CascadeType.ALL)
 	private Adresse adresse;
 	
-	@OneToMany(mappedBy="person", cascade=CascadeType.PERSIST, orphanRemoval=true)
+	@OneToMany(mappedBy="person", cascade=CascadeType.ALL, orphanRemoval=true)
 	private Set<Emailadresse> emailaddresses;	
 	
 	@ManyToMany (cascade=CascadeType.PERSIST)
